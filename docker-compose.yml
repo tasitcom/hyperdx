@@ -4,7 +4,7 @@ services:
   db:
     image: mongo:5.0.32-focal
     volumes:
-      - .volumes/db:/data/db
+      - mongodb_data:/data/db
     networks:
       - internal
 
@@ -61,12 +61,15 @@ services:
     volumes:
       - ./docker/clickhouse/local/config.xml:/etc/clickhouse-server/config.xml
       - ./docker/clickhouse/local/users.xml:/etc/clickhouse-server/users.xml
-      - .volumes/ch_data:/var/lib/clickhouse
-      - .volumes/ch_logs:/var/log/clickhouse-server
+      - clickhouse_data:/var/lib/clickhouse # Noktasız isim
+      - clickhouse_logs:/var/log/clickhouse-server # Noktasız isim
     networks:
       - internal
 
-# DÜZELTİLEN KISIM: Swarm Mode için Overlay Network
+volumes:
+  mongodb_data:
+  clickhouse_data:
+  clickhouse_logs:
 networks:
   internal:
     driver: overlay
