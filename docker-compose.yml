@@ -1,4 +1,6 @@
-version: '3.8'services:
+version: '3.8'
+
+services:
   db:
     image: mongo:5.0.32-focal
     volumes:
@@ -29,7 +31,6 @@ version: '3.8'services:
   app:
     image: ${HDX_IMAGE_REPO}/${IMAGE_NAME_DOCKERHUB}:${IMAGE_VERSION}
     ports:
-      # DEĞİŞİKLİK BURADA: Değişkenler tırnak içine alındı
       - "${HYPERDX_API_PORT}:${HYPERDX_API_PORT}"
       - "${HYPERDX_APP_PORT}:${HYPERDX_APP_PORT}"
     environment:
@@ -60,12 +61,4 @@ version: '3.8'services:
       CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT: 1
     volumes:
       - ./docker/clickhouse/local/config.xml:/etc/clickhouse-server/config.xml
-      - ./docker/clickhouse/local/users.xml:/etc/clickhouse-server/users.xml
-      - .volumes/ch_data:/var/lib/clickhouse
-      - .volumes/ch_logs:/var/log/clickhouse-server
-    restart: on-failure
-    networks:
-      - internal
-
-networks:
-  internal:
+      - ./docker/clickhouse/local/users.xml:/etc/clickhouse-server
