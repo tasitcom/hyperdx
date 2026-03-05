@@ -19,6 +19,7 @@ services:
       HYPERDX_LOG_LEVEL: ${HYPERDX_LOG_LEVEL}
       OPAMP_SERVER_URL: 'http://log-trace-hyperdx-5iuhz1_app:${HYPERDX_OPAMP_PORT}'
       HYPERDX_OTEL_EXPORTER_CREATE_LEGACY_SCHEMA: 'true'
+      HYPERDX_API_KEY: ${HYPERDX_API_KEY}
     ports:
       - "13133:13133"
       - "24225:24225"
@@ -51,6 +52,7 @@ services:
       USAGE_STATS_ENABLED: ${USAGE_STATS_ENABLED:-true}
       DEFAULT_CONNECTIONS: '[{"name":"Local ClickHouse","host":"http://ch-server:8123","username":"default","password":""}]'
       DEFAULT_SOURCES: '...' # (JSON verisini olduğu gibi koru)
+      HYPERDX_API_KEY: ${HYPERDX_API_KEY}
     networks:
       - internal
     depends_on:
