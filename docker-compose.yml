@@ -66,7 +66,8 @@ services:
     networks:
       - internal
 
-# DEĞİŞİKLİK BURADA: Network tanımı daha detaylı hale getirildi
+# DÜZELTİLEN KISIM: Swarm Mode için Overlay Network
 networks:
   internal:
-    driver: bridge
+    driver: overlay
+    attachable: true
