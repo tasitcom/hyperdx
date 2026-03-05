@@ -22,7 +22,6 @@ services:
       - "4317:4317"
       - "4318:4318"
       - "8888:8888"
-    restart: always
     networks:
       - internal
     depends_on:
@@ -61,4 +60,13 @@ services:
       CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT: 1
     volumes:
       - ./docker/clickhouse/local/config.xml:/etc/clickhouse-server/config.xml
-      - ./docker/clickhouse/local/users.xml:/etc/clickhouse-server
+      - ./docker/clickhouse/local/users.xml:/etc/clickhouse-server/users.xml
+      - .volumes/ch_data:/var/lib/clickhouse
+      - .volumes/ch_logs:/var/log/clickhouse-server
+    networks:
+      - internal
+
+# DEĞİŞİKLİK BURADA: Network tanımı daha detaylı hale getirildi
+networks:
+  internal:
+    driver: bridge
