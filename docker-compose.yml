@@ -1,5 +1,4 @@
-name: hdx-oss
-services:
+version: '3.8'services:
   db:
     image: mongo:5.0.32-focal
     volumes:
