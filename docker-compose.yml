@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   db:
-    image: mongo:5.0.32-focal
+    image: mongo:4.4  # İşlemci uyumluluğu (AVX) için 4.4 daha güvenlidir
     volumes:
       - mongodb_data:/data/db
     networks:
@@ -61,8 +61,8 @@ services:
     volumes:
       - ./docker/clickhouse/local/config.xml:/etc/clickhouse-server/config.xml
       - ./docker/clickhouse/local/users.xml:/etc/clickhouse-server/users.xml
-      - clickhouse_data:/var/lib/clickhouse # Noktasız isim
-      - clickhouse_logs:/var/log/clickhouse-server # Noktasız isim
+      - clickhouse_data:/var/lib/clickhouse
+      - clickhouse_logs:/var/log/clickhouse-server
     networks:
       - internal
 
@@ -70,7 +70,9 @@ volumes:
   mongodb_data:
   clickhouse_data:
   clickhouse_logs:
+
+# DÜZELTİLEN KISIM
 networks:
   internal:
-    driver: overlay
-    attachable: true
+    external: true
+    name: log-trace-hyperdx-5iuhz1_internal
